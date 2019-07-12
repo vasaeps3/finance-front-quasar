@@ -8,22 +8,13 @@
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Please type something']"
       />
-      <q-input
-        filled
-        type="number"
-        v-model="age"
-        label="Your age *"
-        lazy-rules
-        :rules="[
-          val => val !== null && val !== '' || 'Please type your age',
-          val => val > 0 && val < 100 || 'Please type a real age'
-        ]"
-      />
+      <q-input type="email" v-model="password" label="Your age *" lazy-rules />
       <div>
         <q-btn label="Submit" type="submit" color="primary" />
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
+    <q-item to="/auth/signup">asdasd</q-item>
   </div>
 </template>
 
@@ -33,7 +24,7 @@ export default {
   data() {
     return {
       email: null,
-      age: null,
+      password: null,
       accept: false,
     };
   },

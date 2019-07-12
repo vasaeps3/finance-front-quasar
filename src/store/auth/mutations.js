@@ -1,3 +1,7 @@
-export const updateDrawerState = (state, opened) => {
-  state.drawerState = opened;
+import { authMutations } from './const';
+
+export default {
+  [authMutations.SET_DATA](state, user) {
+    state.data = user;
+  },
 };

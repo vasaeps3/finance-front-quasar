@@ -1,54 +1,38 @@
 import { axiosInstance } from '../boot/axios';
 
-import tokenService from './token.service';
+import TokenService from './token.service';
 
 
-class ApiService {
-  constructor(tokenService) {
-    this.tokenService = tokenService;
-  }
+export default class ApiService {
+  static setHeader() {
+    const token = TokenService.getToken();
 
-  setHeader() {
-    if (this.tokenService.token) {
-      axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${this.tokenService.getToken()}`
+    if (token) {
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
   }
 
-  removeHeader() {
-    axiosInstance.defaults.headers.common = {}
+  static removeHeader() {
+    axiosInstance.defaults.headers.common = {};
   }
 
-  get(resource) {
-    return axiosInstance.get(resource)
+  static get(resource) {
+    return axiosInstance.get(resource);
   }
 
-  post(resource, data) {
-    return axiosInstance.post(resource, data)
+  static post(resource, data) {
+    return axiosInstance.post(resource, data);
   }
 
-  put(resource, data) {
-    return axiosInstance.put(resource, data)
+  static put(resource, data) {
+    return axiosInstance.put(resource, data);
   }
 
-  delete(resource) {
-    return axiosInstance.delete(resource)
+  static delete(resource) {
+    return axiosInstance.delete(resource);
   }
 
-  /**
-   * Perform a custom Axios request.
-   *
-   * data is an object containing the following properties:
-   *  - method
-   *  - url
-   *  - data ... request payload
-   *  - auth (optional)
-   *    - username
-   *    - password
-  **/
-  customRequest(data) {
-    return axiosInstance(data)
+  static customRequest(data) {
+    return axiosInstance(data);
   }
 }
-const apiService = new ApiService(tokenService);
-
-export default apiService;

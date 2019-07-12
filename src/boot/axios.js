@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-
 export const axiosInstance = axios.create({
-  baseURL: 'https://api.example.com',
+  baseURL: 'https://localhost:3000',
 });
 
 export default async ({ Vue }) => {

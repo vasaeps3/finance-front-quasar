@@ -2,31 +2,30 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-        >
+        <q-btn flat dense round @click="leftDrawerOpen = !leftDrawerOpen" aria-label="Menu">
           <q-icon name="menu" />
         </q-btn>
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
+        <q-toolbar-title>Quasar App</q-toolbar-title>
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
+      <!-- <--------------- -->
+      <div class="aaa">
+        <component v-bind:is="subMenu"></component>
+      </div>
+      <!-- custom content -->
+
+      <!-- asdasdasd -->
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      bordered
-      content-class="bg-grey-2"
-    >
+    <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-grey-2">
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
+        <q-item to="/category" class="items-center">
+          <q-item-section avatar>
+            <q-icon name="fas fa-list" />
+          </q-item-section>
+          <q-item-label>Category</q-item-label>
+        </q-item>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
           <q-item-section avatar>
             <q-icon name="school" />
@@ -83,13 +82,22 @@
 
 <script>
 import { openURL } from 'quasar';
+import CategorySubMenuVue from '../components/category/CategorySubMenu.vue';
 
 export default {
   name: 'Dashboard',
+  components: {
+    'category-sub-menu': CategorySubMenuVue,
+  },
   data() {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop,
     };
+  },
+  computed: {
+    subMenu() {
+      return 'category-sub-menu';
+    },
   },
   methods: {
     openURL,

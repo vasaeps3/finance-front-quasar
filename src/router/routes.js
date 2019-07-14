@@ -1,3 +1,4 @@
+import { authRouter } from '../pages/auth/router';
 
 const routes = [
   {
@@ -5,16 +6,23 @@ const routes = [
     component: () => import('layouts/Dashboard.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') },
+      {
+        path: 'category',
+        component: () => import('pages/category/Category.vue'),
+        children: [
+          {
+            path: 'expense-categories',
+            component: () => import('pages/category/CategoryList.vue'),
+          },
+          {
+            path: 'income-categories',
+            component: () => import('pages/category/CategoryList.vue'),
+          },
+        ],
+      },
     ],
   },
-  {
-    path: '/auth',
-    component: () => import('layouts/Auth.vue'),
-    children: [
-      { path: '', component: () => import('pages/auth/Login.vue') },
-      { path: 'signup', component: () => import('pages/auth/SignUp.vue') },
-    ],
-  },
+  authRouter,
 ];
 
 // Always leave this as last one

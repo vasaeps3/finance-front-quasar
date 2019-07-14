@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import TokenService from '../services/token.service';
 import routes from './routes';
 
 Vue.use(VueRouter);
@@ -10,45 +11,53 @@ Vue.use(VueRouter);
  * directly export the Router instantiation
  */
 
-export default function (/* { store, ssrContext } */) {
-  const Router = new VueRouter({
-    scrollBehavior: () => ({ x: 0, y: 0 }),
-    routes,
+// export default function (/* { store, ssrContext } */) {
+const Router = new VueRouter({
+  scrollBehavior: () => ({ x: 0, y: 0 }),
+  routes,
 
-    // Leave these as is and change from quasar.conf.js instead!
-    // quasar.conf.js -> build -> vueRouterMode
-    // quasar.conf.js -> build -> publicPath
-    mode: process.env.VUE_ROUTER_MODE,
-    base: process.env.VUE_ROUTER_BASE,
-  });
+  // Leave these as is and change from quasar.conf.js instead!
+  // quasar.conf.js -> build -> vueRouterMode
+  // quasar.conf.js -> build -> publicPath
+  mode: process.env.VUE_ROUTER_MODE,
+  base: process.env.VUE_ROUTER_BASE,
+});
 
-  Router.beforeEach((to, from, next) => {
-    console.log('------------------------------------------');
-    console.log('Router.beforeEach from');
-    console.log(from);
-    console.log('to');
-    console.log(to);
-    console.log('------------------------------------------');
-    // const isPublic = to.matched.some(record => record.meta.public)
-    // const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
-    // const loggedIn = !!TokenService.getToken();
+Router.beforeEach((to, from, next) => {
+  console.log('------------------------------------------');
+  console.log('Router.beforeEach from');
+  console.log(from);
+  console.log('to');
+  console.log(to);
+  console.log('------------------------------------------');
+  const isPublic = to.matched.some(record => record.meta.public);
+  console.log(isPublic);
+  // const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
+  const loggedIn = !!TokenService.getToken();
 
-    // if (!isPublic && !loggedIn) {
-    //   return next({
-    //     path: '/login',
-    //     query: { redirect: to.fullPath }
-    // Store the full path to redirect the user to after login
-    //   });
-    // }
+  if (!isPublic && !loggedIn) {
+    next({
+      path: '/auth',
+      query: { redirect: to.fullPath },
+    });
+  }
 
-    // // Do not allow user to visit login page or register page if they are logged in
-    // if (loggedIn && onlyWhenLoggedOut) {
-    //   return next('/')
-    // }
+  // if (!isPublic && !loggedIn) {
+  //   return next({
+  //     path: '/login',
+  //     query: { redirect: to.fullPath }
+  // Store the full path to redirect the user to after login
+  //   });
+  // }
 
-    next();
-  });
+  // // Do not allow user to visit login page or register page if they are logged in
+  // if (loggedIn && onlyWhenLoggedOut) {
+  //   return next('/')
+  // }
+
+  next();
+});
 
 
-  return Router;
-}
+export default Router;
+// }

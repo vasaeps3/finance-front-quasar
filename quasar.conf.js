@@ -1,7 +1,8 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
-module.exports = function (ctx) {
+// eslint-disable-next-line func-names
+module.exports = function () {
   return {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
@@ -49,6 +50,8 @@ module.exports = function (ctx) {
         'QForm',
         'QInput',
         'QToggle',
+        'QTabs',
+        'QRouteTab',
       ],
 
       directives: [
@@ -71,7 +74,7 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -146,7 +149,7 @@ module.exports = function (ctx) {
     electron: {
       // bundler: 'builder', // or 'packager'
 
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       },

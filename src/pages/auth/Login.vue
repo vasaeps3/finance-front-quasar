@@ -1,9 +1,6 @@
 <template>
   <div class="q-layout-padding flex justify-center">
-    <!-- content -->
     <login-form />
-    <q-toggle v-model="drawerState" />
-    {{auth}}
   </div>
 </template>
 

@@ -43,9 +43,13 @@
           />
         </template>
       </q-input>
-      {{formData}}
-      <div>
-        <q-btn label="Sign Up" type="submit" color="primary" />
+      <div class="row justify-between">
+        <div class="col" style="flex: 0 0 auto;">
+          <q-btn label="Sign Up" type="submit" color="primary" />
+        </div>
+        <div class="col flex-0">
+          <q-item to="/auth/signin" class="items-center">Sign in</q-item>
+        </div>
       </div>
     </q-form>
   </div>
@@ -53,7 +57,7 @@
 
 <script>
 import { validateMixin } from '../../boot/validations';
-import { authActions } from '../../store/auth/const';
+// import { authActions } from '../../store/auth/const';
 import AuthService from '../../services/auth.service';
 
 export default {
@@ -75,25 +79,29 @@ export default {
       return val === this.formData.password;
     },
     async onSubmit() {
-      console.log(this.$store);
-      this.$store.dispatch(`auth/${authActions.SIGN_UP}`, this.formData);
-      const a = await AuthService.signUp(this.formData);
-      console.log(a);
-      // if (this.accept !== true) {
-      //   this.$q.notify({
-      //     color: 'red-5',
-      //     textColor: 'white',
-      //     icon: 'fas fa-exclamation-triangle',
-      //     message: 'You need to accept the license and terms first',
-      //   });
-      // } else {
-      //   this.$q.notify({
-      //     color: 'green-4',
-      //     textColor: 'white',
-      //     icon: 'fas fa-check-circle',
-      //     message: 'Submitted',
-      //   });
-      // }
+      try {
+        await AuthService.signUp(this.formData);
+        this.$q.notify({
+          message: 'You have successfully registered',
+          color: 'green-4',
+          icon: 'fas fa-check-circle',
+          textColor: 'white',
+        });
+        this.$router.push('signin');
+      } catch (e) {
+        if (e.message) {
+          e.message.forEach((m) => {
+            m.messages.forEach((er) => {
+              this.$q.notify({
+                message: er,
+                color: 'red-5',
+                icon: 'fas fa-exclamation-triangle',
+                textColor: 'white',
+              });
+            });
+          });
+        }
+      }
     },
   },
 };

@@ -52,17 +52,23 @@ module.exports = function () {
         'QToggle',
         'QTabs',
         'QRouteTab',
+        'QPageSticky',
+        'QDialog',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
       ],
 
       directives: [
         'Ripple',
         'GoBack',
+        'ClosePopup',
       ],
 
       // Quasar plugins
       plugins: [
-        'Notify'
-      ]
+        'Notify',
+      ],
     },
 
     supportIE: false,

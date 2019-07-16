@@ -8,13 +8,9 @@
         <q-toolbar-title>Quasar App</q-toolbar-title>
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
-      <!-- <--------------- -->
-      <div class="aaa">
+      <div v-if="!!subMenu">
         <component v-bind:is="subMenu"></component>
       </div>
-      <!-- custom content -->
-
-      <!-- asdasdasd -->
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-grey-2">
@@ -26,7 +22,7 @@
           </q-item-section>
           <q-item-label>Category</q-item-label>
         </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
+        <!-- <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
           <q-item-section avatar>
             <q-icon name="school" />
           </q-item-section>
@@ -70,7 +66,7 @@
             <q-item-label>Twitter</q-item-label>
             <q-item-label caption>@quasarframework</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item>-->
       </q-list>
     </q-drawer>
 
@@ -96,7 +92,7 @@ export default {
   },
   computed: {
     subMenu() {
-      return 'category-sub-menu';
+      return this.$store.state.subMenu.subMenu;
     },
   },
   methods: {

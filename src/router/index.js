@@ -24,14 +24,13 @@ const Router = new VueRouter({
 });
 
 Router.beforeEach((to, from, next) => {
-  console.log('------------------------------------------');
-  console.log('Router.beforeEach from');
-  console.log(from);
-  console.log('to');
-  console.log(to);
-  console.log('------------------------------------------');
+  // console.log('------------------------------------------');
+  // console.log('Router.beforeEach from');
+  // console.log(from);
+  // console.log('to');
+  // console.log(to);
+  // console.log('------------------------------------------');
   const isPublic = to.matched.some(record => record.meta.public);
-  console.log(isPublic);
   // const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
   const loggedIn = !!TokenService.getToken();
 

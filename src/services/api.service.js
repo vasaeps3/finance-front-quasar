@@ -1,17 +1,6 @@
 import { axiosInstance } from '../boot/axios';
 
-import TokenService from './token.service';
-
-
 export default class ApiService {
-  static setHeader() {
-    const token = TokenService.getToken();
-
-    if (token) {
-      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-  }
-
   static removeHeader() {
     axiosInstance.defaults.headers.common = {};
   }

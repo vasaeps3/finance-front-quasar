@@ -3,7 +3,6 @@ import * as getters from './getters';
 import mutations from './mutations';
 import actions from './actions';
 
-console.log({ ...actions });
 export default {
   namespaced: true,
   state,

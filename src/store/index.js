@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import auth from './auth';
 import subMenu from './subMenu';
+import category from './category';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default function (/* { ssrContext } */) {
     modules: {
       auth,
       subMenu,
+      category,
     },
 
     // enable strict mode (adds overhead!)

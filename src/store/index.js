@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import auth from './auth';
-import subMenu from './subMenu';
+import dinComponents from './dinComponents';
 import category from './category';
 
 Vue.use(Vuex);
@@ -16,7 +16,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth,
-      subMenu,
+      dinComponents,
       category,
     },
 

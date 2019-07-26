@@ -71,6 +71,7 @@
     </q-drawer>
 
     <q-page-container>
+      <custom-modal />
       <router-view />
     </q-page-container>
   </q-layout>
@@ -79,11 +80,13 @@
 <script>
 import { openURL } from 'quasar';
 import CategorySubMenuVue from '../components/category/CategorySubMenu.vue';
+import CustomModalVue from '../components/common/CustomModal.vue';
 
 export default {
   name: 'Dashboard',
   components: {
     'category-sub-menu': CategorySubMenuVue,
+    'custom-modal': CustomModalVue,
   },
   data() {
     return {
@@ -92,7 +95,7 @@ export default {
   },
   computed: {
     subMenu() {
-      return this.$store.state.subMenu.subMenu;
+      return this.$store.state.dinComponents.subMenu;
     },
   },
   methods: {

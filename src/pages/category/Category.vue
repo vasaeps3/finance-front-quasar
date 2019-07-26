@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex ">
+  <q-page class="flex">
     <router-view />
   </q-page>
 </template>
@@ -8,17 +8,20 @@
 </style>
 
 <script>
-import { subMenuActions } from '../../store/subMenu/const';
+import { dinComponentsActions } from '../../store/dinComponents/const';
 
 export default {
   beforeCreate() {
     this.$store.dispatch(
-      `subMenu/${subMenuActions.SET_MENU}`,
+      `dinComponents/${dinComponentsActions.SET_MENU}`,
       'category-sub-menu',
     );
   },
   beforeDestroy() {
-    this.$store.dispatch(`subMenu/${subMenuActions.SET_MENU}`, null);
+    this.$store.dispatch(
+      `dinComponents/${dinComponentsActions.SET_MENU}`,
+      null,
+    );
   },
   name: 'PageIndex',
 };

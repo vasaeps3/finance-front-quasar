@@ -59,6 +59,7 @@ module.exports = function () {
         'QCardActions',
         'QInnerLoading',
         'QSpinnerGears',
+        'QSeparator',
       ],
 
       directives: [
